@@ -1,0 +1,26 @@
+Iteration 1 Plan
+
+High Level Objectives:
+
+	Domain Model:
+		Create the Domain Model for all use cases
+	System Sequence Diagram:
+		Create the System Sequence Diagram for all use cases
+	Design Document
+		Create iteration and class diagram
+	First Draft Implementation
+		Implement the firsst draft of the working source code
+
+List of work items:
+
+	Domain Model:									Kristi
+	System Sequence Diagram:			Kristi
+	Source Code:									Kristi/Ali
+	Iteration Plan:								Ali
+	Design Documentation:					Nadeen
+	Demonstration of Source Code:	Kristi/Ali/Nadeen
+
+Evaluation Criteria:
+
+	Testing source code
+	Demonstration of working application
