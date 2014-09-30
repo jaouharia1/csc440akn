@@ -10,8 +10,8 @@
 			$name;
 			include "dbCon.php";
 			$query="SELECT stat_name FROM sr_stat WHERE stat_id=$this->stat_id";
-			$result = mysql_query($query, $con);
-			while ($row = mysql_fetch_assoc($result)) {
+			$result = mysqli_query($link, $query);
+			while ($row = mysqli_fetch_assoc($result)) {
 				$name=$row['stat_name'];
 			}
 			return $name;
