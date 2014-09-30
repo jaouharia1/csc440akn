@@ -3,13 +3,14 @@
 	ini_set('display_startup_errors',1);
 	error_reporting(-1);
 	
+	
 	class address{
 		public $parcel;
 
 		
 		public function __construct($parcel) {
-				//$this->parcel = $parcel;
-				$this->parcel = "00380A030487";
+				$this->parcel = $parcel;
+				//$this->parcel = "00380A030487";
 		}
 		
 		
