@@ -1,0 +1,41 @@
+﻿#header {
+    text-align:center;
+    padding:5px;
+	background-color: #5fffff;
+}
+#nav {
+	margin-top: 1cm;
+    line-height:30px;
+    float:left;
+    padding:5px;
+	background-color: #f5ffff;
+}
+
+#nav a:link { color: #00BCE4;
+			font-weight: bold;
+			text-decoration: none;}
+#nav a:visited { color: #00457C;
+			font-weight: bold;
+			text-decoration: none;}
+#nav a:hover { color: #CCCCCC;
+			font-weight: bold;
+			text-decoration: none;}
+
+
+.right { text-align: right; }
+.navHeader { color: #00457C;
+			font-weight: bold;
+			text-decoration: underline;}
+
+#section {
+	margin-top: 1cm;
+    float:left;
+    padding:10px;
+	background-color: #fff5ff;
+}
+#footer {
+    clear:both;
+    text-align:center;
+    padding:5px;
+	background-color: #fffff5;
+}
