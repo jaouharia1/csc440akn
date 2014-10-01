@@ -1,15 +1,14 @@
 <?php
-	ini_set('display_errors',1);
-	ini_set('display_startup_errors',1);
-	error_reporting(-1);
+	//ini_set('display_errors',1);
+	//ini_set('display_startup_errors',1);
+	//error_reporting(-1);
 	
 	class address{
 		public $parcel;
 
 		
 		public function __construct($parcel) {
-				//$this->parcel = $parcel;
-				$this->parcel = "00380A030487";
+				$this->parcel = $parcel;
 		}
 		
 		
@@ -17,7 +16,7 @@
 			$nhood;
 			include "dbCon.php";
 			$query="SELECT n.name FROM address a
-					JOIN nhood n ON a.nhood_id=n.nhood_id
+					JOIN nhood_list n ON a.nhood_id=n.nhood_id
 					WHERE a.parcel='$this->parcel'";
 			$result = mysqli_query($link, $query);
 			while ($row = mysqli_fetch_assoc($result)) {
