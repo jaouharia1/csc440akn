@@ -1,4 +1,8 @@
 <?php
+     error_reporting(E_ALL);
+     ini_set('display_errors', 1);
+
+
 include 'header.php';
 session_start();
 
@@ -16,7 +20,7 @@ $password = $_POST['password'];
 	while($row = mysql_fetch_assoc($query) ){
 		$dbusername = $row['username'];
 		$dbpassword = $row['password'];
-		//echo"$dbusername/$dbpassword";
+		echo"$dbusername/$dbpassword";
 	}
 	if($username==$dbusername && md5($password)==$dbpassword){
 		//echo "You're In!! <a href='member.php'>Click</a> here to enter the member page";
