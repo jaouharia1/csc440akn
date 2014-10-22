@@ -4,7 +4,7 @@
 	include "dbCon.php";
 	
 	//Initial Query for the results
-	$query = "SELECT * FROM nhood WHERE 1=1 ";
+	$query = "SELECT * FROM nhood_list WHERE 1=1 ";
 	
 	$NhoodResult1 = mysqli_query($link, $query);
 	$NhoodResult2 = mysqli_query($link, $query);
