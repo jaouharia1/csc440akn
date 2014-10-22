@@ -17,5 +17,6 @@
 			echo "<td><a href=\"index.php?pgNum=4\">Neighborhoods</a></td>";
 			echo "<td><a href=\"index.php?pgNum=5\">Map Statistics</a></td>";
 			echo "<td><a href=\"index.php?pgNum=6\">Comparison</a></td>";
+			echo "<td><a href=\"index.php?pgNum=7\">Administrator</a></td>";
 ?>
 			<td><a href="index.php"><img src="images/city_logo.png" alt="City of Cincinnati" align="right" /></a></td></table>

@@ -21,6 +21,7 @@
 			elseif($this->content==4) {include "nhood_list.php";}
 			elseif($this->content==5) {include "map_stat.php";}
 			elseif($this->content==6) {include "nhood_comp.php";}
+			elseif($this->content==7) {include "admin.php";}
 			else {include "main.php";}
 			include "footer.php";
         }
