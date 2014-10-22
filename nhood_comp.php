@@ -1,5 +1,5 @@
 <?php
-	echo "<hr><h1>Neighborhood Comparison</h1><hr>";
+	echo "<hr><h1>Neighborhood Comparisonnnnnnnnnn</h1><hr>";
 	
 	include "dbCon.php";
 	
