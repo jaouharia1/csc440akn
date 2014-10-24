@@ -10,9 +10,9 @@ $password = strip_tags(@$_POST['password']);
 $repeatpassword = strip_tags(@$_POST['repeatpassword']);
 //$date = date("Y-m-d");
 if($submit){ 
-	$connect = mysql_connect("172.31.37.185", "kristi", "password");
+	$connect = mysql_connect("localhost", "root", "") ;
 	mysql_select_db("akndb");
-	$namecheck = mysql_query("SELECT username FROM users Where username=$username");
+	$namecheck = mysql_query("SELECT username FROM users Where username='.$username.'");
 	$count = mysql_num_rows($namecheck);
 	
 	if($count!=0){
