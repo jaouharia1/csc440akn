@@ -9,7 +9,7 @@ require('login.php');
 
 }else{
     $username = $_SESSION['username'];
-    $connect = mysql_connect("localhost", "root", "");
+    $connect = mysql_connect("172.31.37.185", "kristi", "password");
 	mysql_select_db("akndb");
     $query = mysql_query("SELECT * FROM users");
 	$numrows = mysql_num_rows($query);
