@@ -9,10 +9,10 @@
 
 <table width=100%>
 	<tr>
-		<td><a href="index.php?pgNum=1"><img src="images/sr.png" alt="Service Requests"/></a></td>
-		<td><a href="index.php?pgNum=3"><img src="images/vp.png" alt="Vacant Properties"/></a></td>
-		<td><a href="index.php?pgNum=4"><img src="images/nhood.png" alt="Neighborhoods"/></a></td>
-		<td><a href="index.php?pgNum=5"><img src="images/map_stat.png" alt="Map View"/></a></td>
+		<td><a href="index.php?pgNum=1"><img src="sr.png" alt="Service Requests"/></a></td>
+		<td><a href="index.php?pgNum=3"><img src="vp.png" alt="Vacant Properties"/></a></td>
+		<td><a href="index.php?pgNum=4"><img src="nhood.png" alt="Neighborhoods"/></a></td>
+		<td><a href="index.php?pgNum=5"><img src="map_stat.png" alt="Map View"/></a></td>
 		<td><a href="index.php"><img src="city_logo.png" alt="City of Cincinnati" align="right" /></a></td>
 	</tr>
 </table>
