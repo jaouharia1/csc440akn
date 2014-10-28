@@ -1,11 +1,11 @@
 <?php 
-	//ini_set('display_errors',1);
-	//ini_set('display_startup_errors',1);
-	//error_reporting(-1);
+	ini_set('display_errors',1);
+	ini_set('display_startup_errors',1);
+	error_reporting(-1);
 	
 	include "dbCon.php";
 
-	define('CSV_PATH','/var/www/html/csc440/uploadFiles'); // specify CSV file path
+	define('CSV_PATH','/var/www/html/csc440/uploadFiles/'); // specify CSV file path
 	$fileNames=array("sr1-2013.csv", "sr2-2012.csv", "sr3-2011.csv", "sr4-2010.csv", "sr5-2009.csv", "sr6-2008.csv" );
 	$numFiles=sizeof($fileNames);
 	for ($i=0; $i<$numFiles; $i++) {
@@ -13,9 +13,10 @@
 		$csvfile = fopen($csv_file, 'r');
 		$theData = fgets($csvfile);
 		if(!$theData) echo "File not found";
+		else echo "Attempting to Add...<br>";
 		while (!feof($csvfile)) {
 			$fgetsline = fgets($csvfile);
-			//echo $fgetsline."<br>";
+			echo $fgetsline."<br>";
 			$csv_array = explode(",", $fgetsline );
 			$csr = trim($csv_array[0]);
 			$status = trim($csv_array[1]);
@@ -94,58 +95,58 @@
 			
 				//If there is a new Status, add it.
 				$StatCheckQuery = "SELECT * FROM sr_stat WHERE stat_name='$status'";
-				$StatCheckResult=mysqli_query($con, $StatCheckQuery);
+				$StatCheckResult=mysqli_query($link, $StatCheckQuery);
 				$num_rows = mysqli_num_rows($StatCheckResult);
 				if($num_rows==0 and $status!=NULL){
 					$statInsertQuery = "INSERT INTO sr_stat (stat_name) VALUES ('$status')";
-					mysqli_query($con, $statInsertQuery);
+					mysqli_query($link, $statInsertQuery);
 				}
 				$getStatQuery = "SELECT stat_id FROM sr_stat WHERE stat_name='$status'";
-				$statIDResult=mysqli_query($con, $getStatQuery);
+				$statIDResult=mysqli_query($link, $getStatQuery);
 				while ($row = mysqli_fetch_assoc($statIDResult)) {
 					$status=$row['stat_id'];
 				}
 				
 				//If there is a new priority, add it
 				$PriCheckQuery = "SELECT * FROM sr_priority WHERE priority_name='$priority'";
-				$PriCheckResult=mysqli_query($con, $PriCheckQuery);
+				$PriCheckResult=mysqli_query($link, $PriCheckQuery);
 				$num_rows = mysqli_num_rows($PriCheckResult);
 				if($num_rows==0 and $priority!=NULL){
 					$PriInsertQuery = "INSERT INTO sr_priority (priority_name) VALUES ('$priority')";
-					mysqli_query($con, $PriInsertQuery);
+					mysqli_query($link, $PriInsertQuery);
 				}
 				$getPriQuery = "SELECT priority_id FROM sr_priority WHERE priority_name='$priority'";
-				$priIDResult=mysqli_query($con, $getPriQuery);
+				$priIDResult=mysqli_query($link, $getPriQuery);
 				while ($row = mysqli_fetch_assoc($priIDResult)) {
 					$priority=$row['priority_id'];
 				}
 				
 				//If there is a new type, add it
 				$TypeCheckQuery = "SELECT * FROM sr_type WHERE type_name='$type'";
-				$TypeCheckResult=mysqli_query($con, $TypeCheckQuery);
+				$TypeCheckResult=mysqli_query($link, $TypeCheckQuery);
 				$num_rows = mysqli_num_rows($TypeCheckResult);
 				if($num_rows==0 and $type!=NULL){
 					$TypeInsertQuery = "INSERT INTO sr_type (type_name) VALUES ('$type')";
-					mysqli_query($con, $TypeInsertQuery);
+					mysqli_query($link, $TypeInsertQuery);
 				}
 				$getTypeQuery = "SELECT type_id FROM sr_type WHERE type_name='$type'";
-				$typeIDResult=mysqli_query($con, $getTypeQuery);
+				$typeIDResult=mysqli_query($link, $getTypeQuery);
 				while ($row = mysqli_fetch_assoc($typeIDResult)) {
 					$type=$row['type_id'];
 				}
 				
 				//If there is a new address, add it
 				$AddrCheckQuery = "SELECT * FROM address WHERE parcel='$parcel'";
-				$AddrCheckResult=mysqli_query($con, $AddrCheckQuery);
+				$AddrCheckResult=mysqli_query($link, $AddrCheckQuery);
 				$num_rows = mysqli_num_rows($AddrCheckResult);
 				if($num_rows==0 and $parcel!=NULL){
 					$AddrInsertQuery = "INSERT INTO address (parcel, st_no, st_dir, st_name, nhood_id, xcoord, ycoord) VALUES
 					('$parcel', '$st_no', '$st_dir', '$st_name', $nhood, $xcoord, $ycoord)";
-					mysqli_query($con, $AddrInsertQuery);
+					mysqli_query($link, $AddrInsertQuery);
 				}
 				
 				$SRcheckQuery = "SELECT * FROM sr_list WHERE csr_id='$csr'";
-				$SRcheckResult=mysqli_query($con, $SRcheckQuery);
+				$SRcheckResult=mysqli_query($link, $SRcheckQuery);
 				$num_rows = mysqli_num_rows($SRcheckResult);
 				if($num_rows==0){
 					if($pln_comp_dt==NULL && $comp_dt==NULL) {
@@ -163,7 +164,7 @@
 						$insertQuery = "INSERT INTO sr_list (csr_id, stat_id, type_id, description, rcvd_dt, priority_id, pln_comp_dt, comp_dt, parcel) VALUES
 						('$csr', $status, $type, '$desc', '$rcvd_dt', $priority, '$pln_comp_dt', '$comp_dt', '$parcel')";
 					}
-					mysqli_query($con, $insertQuery);
+					mysqli_query($link, $insertQuery);
 					//echo $insertQuery."<br>";
 				}
 			}
@@ -172,7 +173,7 @@
     fclose($csvfile);
 
 echo "File data successfully imported to database!!";
-mysqli_close($con);
+mysqli_close($link);
 
 
 ?>
