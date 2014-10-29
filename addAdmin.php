@@ -18,7 +18,7 @@ if($submit){
 	if($count!=0){
 		die("Username already exists, please choose another username");
 	}
-	if($username && $firstname && $lastname && $email && $password &&$repeatpassword){
+	if($username && $firstname && $lastname && $email && $password && $repeatpassword){
 		
 		if($password == $repeatpassword){
 			if(strlen($username)>25){
@@ -36,7 +36,7 @@ if($submit){
 						$repeatpassword = md5($repeatpassword);
 						
 						$queryreg = mysql_query("INSERT INTO users VALUES('','$username','$password','$firstname','$lastname','$email','','NOW()')");
-						echo "Aministrator added successfully!!";
+						echo "Administrator added successfully!!";
 						}
 			}
 		}else{
@@ -53,7 +53,7 @@ if($submit){
 		<table>
 			<tr>
 			<td>
-			Username :
+			Username:
 			</td>
 			<td>
 			<input type='text' name='username' value='<?php echo $username;?>'>
@@ -61,7 +61,7 @@ if($submit){
 			</tr>
 			<tr>
 			<td>
-			First Name :
+			First Name:
 			</td>
 			<td>
 			<input type='text' name='firstname' value='<?php echo $firstname;?>'>
@@ -69,7 +69,7 @@ if($submit){
 			</tr>
 			<tr>
 			<td>
-			Last Name :
+			Last Name:
 			</td>
 			<td>
 			<input type='text' name='lastname' value='<?php echo $lastname;?>'>
@@ -77,7 +77,7 @@ if($submit){
 			</tr>
 			<tr>
 			<td>
-			Password :
+			Password:
 			</td>
 			<td>
 			<input type='password' name='password'>
@@ -85,7 +85,7 @@ if($submit){
 			</tr>
 			<tr>
 			<td>
-			Retype Password :
+			Retype Password:
 			</td>
 			<td>
 			<input type='password' name='repeatpassword'>
@@ -93,7 +93,7 @@ if($submit){
 			</tr>
 			<tr>
 			<td>
-			email :
+			Email:
 			</td>
 			<td>
 			<input type='text' name='email' value='<?php echo $email?>'>

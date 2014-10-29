@@ -87,10 +87,11 @@
 		
 		$result = mysqli_query($link, $query);
 		while ($row = mysqli_fetch_assoc($result)) {
-			//public function __construct($csr_num, $stat_id, $sr_type, $rcvd_dt, $priority, $parcel, $pln_comp_dt, $comp_dt)
+			//public function __construct($csr_num, $stat_id, $sr_type, $description, $rcvd_dt, $priority, $parcel, $pln_comp_dt, $comp_dt) {
 			$sr_temp = new sr( $row['csr_id'],
 						new sr_stat($row['stat_id']),
 						new sr_type($row['type_id']),
+						$row['description'],
 						$row['rcvd_dt'],
 						new sr_priority($row['priority_id']),
 						new address($row['parcel']),
@@ -98,6 +99,7 @@
 						$row['comp_dt']
 						);
 			$srlist->add_sr($sr_temp);
+
 		}
 		$row_count=mysqli_num_rows($result);
 		if($row_count>0){
