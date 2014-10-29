@@ -7,7 +7,7 @@
 	$hostname = "172.31.37.185";
 	$username = "kristi";
 	$password = "password";
-	$database = "akndb";
+	$database = "test";
 	
 	
 	$link = mysqli_init();
