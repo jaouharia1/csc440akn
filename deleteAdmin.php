@@ -16,7 +16,7 @@ require('login.php');
 		mysqli_query($link, $delUserQ);
 	}*/
     $username = $_SESSION['username'];
-    $connect = mysql_connect("172.31.37.185", "kristi", "password");
+    $connect = mysql_connect("172.31.17.39", "kristi", "password");
 	mysql_select_db("akndb");
     $query = mysql_query("SELECT * FROM users");
 	$numrows = mysql_num_rows($query);

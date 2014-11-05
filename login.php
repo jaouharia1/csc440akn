@@ -8,7 +8,7 @@ $password = strtolower(strip_tags(@$_POST['password']));
 
  if ($username && $password){
 
-	$connect = mysql_connect("172.31.37.185", "kristi", "password") or die("Couldn't connect!!");
+	$connect = mysql_connect("172.31.17.39", "kristi", "password") or die("Couldn't connect!!");
 	mysql_select_db("akndb") or die("Couldn't find Database!");
 
 	$query = mysql_query("SELECT * FROM users WHERE username = '$username'");
