@@ -113,3 +113,16 @@ create table sr_list
   stat_dt date,
   parcel varchar(30)
 );
+
+create table users
+(
+user_id int(3) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+user_name char(25) NOT NULL,
+password char(255) NOT NULL,
+first_name char(25) NOT NULL,
+last_name char(25) NOT NULL,
+email char(50) NOT NULL,
+registing_date DATE,
+UNIQUE(user_name),
+UNIQUE(email)
+);
