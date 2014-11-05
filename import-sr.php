@@ -6,12 +6,137 @@
 	session_start();
 	if($_SESSION['username']){
 		include "dbCon.php";
-	
-		define('CSV_PATH','/var/www/html/csc440/uploadFiles/'); // specify CSV file path
-		$fileNames=array("sr1-2013.csv", "sr2-2012.csv", "sr3-2011.csv", "sr4-2010.csv", "sr5-2009.csv", "sr6-2008.csv" );
+		include "convertFunctions.php";
+		
+		
+		file_put_contents("uploadFiles/sr6-2008.xlsx", file_get_contents("http://www.cincinnati-oh.gov/cityofcincinnati/assets/File/data/service_request_2008.xlsx"));
+		file_put_contents("uploadFiles/sr5-2009.xlsx", file_get_contents("http://www.cincinnati-oh.gov/cityofcincinnati/assets/File/data/service_request_2009.xlsx"));
+		file_put_contents("uploadFiles/sr4-2010.xlsx", file_get_contents("http://www.cincinnati-oh.gov/cityofcincinnati/assets/File/data/service_request_2010.xlsx"));
+		file_put_contents("uploadFiles/sr3-2011.xlsx", file_get_contents("http://www.cincinnati-oh.gov/cityofcincinnati/assets/File/data/service_request_2011.xlsx"));
+		file_put_contents("uploadFiles/sr2-2012.xlsx", file_get_contents("http://www.cincinnati-oh.gov/cityofcincinnati/assets/File/data/service_request_2012.xlsx"));
+		file_put_contents("uploadFiles/sr1-2013.xlsx", file_get_contents("http://www.cincinnati-oh.gov/cityofcincinnati/assets/File/data/service_request_2013.xlsx"));
+		
+		define('CSV_PATH','/var/www/html/csc440/csv/'); // specify CSV file path
+		$fileNames=array("sr1-2013.xlsx", "sr2-2012.xlsx", "sr3-2011.xlsx", "sr4-2010.xlsx", "sr5-2009.xlsx", "sr6-2008.xlsx" );
+		$csvNames=array("sr1-2013.csv", "sr2-2012.csv", "sr3-2011.csv", "sr4-2010.csv", "sr5-2009.csv", "sr6-2008.csv" );
 		$numFiles=sizeof($fileNames);
 		for ($i=0; $i<$numFiles; $i++) {
-			$csv_file = CSV_PATH . $fileNames[$i]; // Name of your CSV file
+			$file=$fileNames[$i];
+			$throttle="";  
+			$cleanup ="1";
+			$unpack = "0";
+			$newcsvfile  = str_replace(".xlsx",".csv",$file);
+			$newcsvfile = str_replace(" ","-",$newcsvfile);
+			$newcsvfile = "csv/$newcsvfile";
+			if(!is_dir('bin')) {mkdir("bin", 0770);}; 
+			if(!is_dir('csv')) {mkdir("csv", 0777);};
+			if($unpack!="1"){
+				require_once 'PCLZip/pclzip.lib.php'; 
+				$archive = new PclZip($file);
+				$list = $archive->extract(PCLZIP_OPT_PATH, "bin"); 
+			}
+			
+			$strings = array();  
+			$dir = getcwd();
+			$filename = $dir."\bin\xl\sharedstrings.xml";   
+
+			$z = new XMLReader;
+			$z->open($filename);
+
+			$doc = new DOMDocument;
+
+			$csvfile = fopen($newcsvfile,"w");
+
+			while ($z->read() && $z->name !== 'si');
+			ob_start();
+
+			while ($z->name === 'si') {
+				// either one should work
+				$node = new SimpleXMLElement($z->readOuterXML());
+				// $node = simplexml_import_dom($doc->importNode($z->expand(), true));
+        
+				$result = xmlObjToArr($node);   
+				$count = count($result['text']) ;
+   
+				if(isset($result['children']['t'][0]['text'])){
+					$val = $result['children']['t'][0]['text'];
+					$strings[]=$val;
+				};                   
+				$z->next('si');
+				$result=NULL;      
+			};
+			ob_end_flush();
+			$z->close($filename);
+			$dir = getcwd();
+			$filename = $dir."\bin\xl\worksheets\sheet1.xml";    
+			$z = new XMLReader;
+			$z->open($filename);
+			$doc = new DOMDocument;
+			$rowCount="0";
+			$doc = new DOMDocument; 
+			$sheet = array();  
+			$nums = array("0","1","2","3","4","5","6","7","8","9");
+			while ($z->read() && $z->name !== 'row');
+			ob_start();
+			while ($z->name === 'row') {  
+				$thisrow=array();
+				$node = new SimpleXMLElement($z->readOuterXML());
+				$result = xmlObjToArr($node); 
+				$cells = $result['children']['c'];
+				$rowNo = $result['attributes']['r']; 
+				$colAlpha = "A";
+
+				foreach($cells as $cell){
+					if(array_key_exists('v',$cell['children'])){
+						$cellno = str_replace($nums,"",$cell['attributes']['r']);
+						for($col = $colAlpha; $col != $cellno; $col++) {
+							$thisrow[]=" ";
+							$colAlpha++; 
+						};
+						if(array_key_exists('t',$cell['attributes'])&&$cell['attributes']['t']='s'){
+							$val = $cell['children']['v'][0]['text'];
+							$string = $strings[$val] ;
+							$thisrow[]=$string;
+						} 
+						else {
+							$thisrow[]=$cell['children']['v'][0]['text'];
+						}
+					}
+					else {$thisrow[]="";};
+					$colAlpha++;
+				};
+
+				$rowLength=count($thisrow);
+				$rowCount++;
+				$emptyRow=array();
+
+				while($rowCount<$rowNo){
+					for($c=0;$c<$rowLength;$c++) {
+						$emptyRow[]=""; 
+					}
+
+					if(!empty($emptyRow)){
+						my_fputcsv($csvfile,$emptyRow);
+					};
+					$rowCount++;
+				};
+				my_fputcsv($csvfile,$thisrow);      
+				if($rowCount<$throttle||$throttle==""||$throttle=="0") {
+					$z->next('row');
+				} 
+				else 
+					{break;};
+				$result=NULL;
+			};
+			$z->close($filename);
+			ob_end_flush(); 
+
+			if($cleanup!="1"){
+				cleanUp("bin/");  
+			};
+	
+		
+			$csv_file = CSV_PATH . $csvNames[$i]; // Name of your CSV file
 			$csvfile = fopen($csv_file, 'r');
 			$theData = fgets($csvfile);
 			if(!$theData) echo "File not found";
