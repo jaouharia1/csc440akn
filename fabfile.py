@@ -1,7 +1,7 @@
 # capistrano in ruby
 from fabric.api import *
 
-env.hosts = ['54.69.183.12']
+env.hosts = ['54.213.113.3']
 env.user  = 'ec2-user'
 env.key_filename = 'csc440-jaouharia1(1).pem'
 
@@ -18,6 +18,7 @@ def deploy():
 
     # install all packages you need here
     run('sudo yum install -y git httpd')
+    
 
     # create dirs, set ownerships, then pull the code from git
     with cd(code_dir):
@@ -27,4 +28,4 @@ def deploy():
                 run('git clone ' + github_url + ' ' + deploy_dir)
         with cd(deploy_dir):
             run('git pull')
-            run('rm -rf deliverables')
+            run('rm -rf Deliverables')

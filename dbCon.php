@@ -4,7 +4,7 @@
 	//ini_set('display_startup_errors',1);
 	//error_reporting(-1);
 		
-	$hostname = "172.31.37.185";
+	$hostname = "172.31.17.39";
 	$username = "kristi";
 	$password = "password";
 	$database = "akndb";
