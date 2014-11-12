@@ -1,6 +1,10 @@
 <?php
 	echo "<script src=\"tableToExcel.js\"></script>";
-	echo "<hr><h1>Service Requests</h1><hr>";
+	echo "<hr>";
+	echo "<table width=100%><tr>";
+	echo "<td width=25% class='title'>Service Requests</td>";
+	echo "<td width=75% class=\"right\">Filter, Search and Map all Service Request Records</td></tr></table>";
+	echo "<hr>";
 	//Database Connection information
 	include "dbCon.php";
 	
