@@ -1,5 +1,9 @@
 <?php
-	echo "<hr><h1>Neighborhoods</h1><hr>";
+	echo "<hr>";
+	echo "<table width=100%><tr>";
+	echo "<td width=25% class='title'>Neighborhoods</td>";
+	echo "<td width=75% class=\"right\">Select a Neighborhood and see a Service Request and Vacant Property Record Overview</td></tr></table>";
+	echo "<hr>";
 	
 	include "dbCon.php";
 	
@@ -29,49 +33,65 @@
 		$query=$query." AND nhood_id=$nhood ";
 		$result = mysqli_query($link, $query);
 		while ($row = mysqli_fetch_assoc($result)) {
-			echo "<h1>".$row['name']."</h1>";
-			echo "<p>Perimeter: ".$row['perimeter']."</p>";
-			echo "<p>Area: ".$row['area']."</p>";
-			echo "<p>Acerage: ".$row['acres']."</p>";
-			echo "<p>Number of Vacant Properties By Type:</p>";
-			$vp_tot=0;
+			echo "<p class='title'>".$row['name']."</p>";
+			if($row['perimeter']>0) {
+				echo "<p class='odcText'>Perimeter: ".number_format(($row['perimeter']*.000189394),2)." Miles</p>";
+				echo "<p class='odcText'>Area: ".number_format(($row['area']*.00000003587),2)." Square Miles</p>";
+				echo "<p class='odcText'>Acerage: ".number_format($row['acres'],2)." Acres</p>";
+			}
+			else echo "<p class='odcText'>No Size Information Found</p>";
 			
+			/*
+			Vacant Property Records are no longer by Neighborhood
 			$vpQuery="SELECT COUNT(v.parcel) as cnt, vp_type FROM vp_list v
 				JOIN address a ON v.parcel=a.parcel
 				WHERE a.nhood_id=$nhood 
-				group by vp_type";
-			
-			echo "<table>";
+				group by vp_type";			
 			$vpResult = mysqli_query($link, $vpQuery);
-			while ($row = mysqli_fetch_assoc($vpResult)) {
-				echo "<tr><td>";
-				echo $row['vp_type']->getName();
-				echo ": </td><td>";
-				echo $row['cnt'];
-				echo "</td></tr>";
-				$vp_tot++;
+			$num_rows = mysql_num_rows($vpResult);
+			if($num_rows>0) {
+				echo "<p class='odcText'>Number of Vacant Properties By Type:</p>";
+				$vp_tot=0;
+				echo "<table class='odcText'>";
+				while ($row = mysqli_fetch_assoc($vpResult)) {
+					echo "<tr><td>";
+					echo $row['vp_type']->getName();
+					echo ": </td><td>";
+					echo $row['cnt'];
+					echo "</td></tr>";
+					$vp_tot=$vp_tot+$row['cnt'];
+				}
+				echo "<tr><td>Total: </td><tr>$vp_tot</td></tr></table>";
 			}
-			echo "<tr><td>Total: </td><tr>$vp_tot</td></tr></table>";
+			else {
+				echo "<p class='odcText'>No Vacant Properties were found in this Neighborhood</p>";
+			}*/
 			
-			echo "<p>Number of Service Requests By Type:</p>";
-			$sr_tot=0;
+			
 			
 			$srQuery="SELECT COUNT(sr.parcel) as cnt, sr_type FROM sr_list sr
 				JOIN address a ON sr.parcel=a.parcel
 				WHERE sr.nhood_id=$nhood 
 				group by sr_type";
-			
-			echo "<table>";
 			$srResult = mysqli_query($link, $srQuery);
-			while ($row = mysqli_fetch_assoc($srResult)) {
-				echo "<tr><td>";
-				echo $row['sr_type']->getName();
-				echo ": </td><td>";
-				echo $row['cnt'];
-				echo "</td></tr>";
-				$sr_tot++;
+			$num_rows = mysql_num_rows($srResult);
+			if($num_rows>0) {
+				echo "<p class='odcText'>Number of Service Requests By Type:</p>";
+				$sr_tot=0;
+				echo "<table class='odcText' border=1>";
+				while ($row = mysqli_fetch_assoc($srResult)) {
+					echo "<tr><td>";
+					echo $row['sr_type']->getName();
+					echo ": </td><td>";
+					echo $row['cnt'];
+					echo "</td></tr>";
+					$sr_tot=$sr_tot+$row['cnt'];
+				}
+				echo "<tr><td>Total: </td><tr>$sr_tot</td></tr></table>";
 			}
-			echo "<tr><td>Total: </td><tr>$sr_tot</td></tr></table>";
+			else {
+				echo "<p class='odcText'>No Service Request Records were found in this Neighborhood</p>";
+			}
 			
 			
 		}
