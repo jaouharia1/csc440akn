@@ -8,24 +8,15 @@
 		include "dbCon.php";
 		require_once 'PHPExcel/PHPExcel/IOFactory.php';
 		
-		
-		file_put_contents("uploadFiles/sr6-2008.xlsx", file_get_contents("http://www.cincinnati-oh.gov/cityofcincinnati/assets/File/data/service_request_2008.xlsx"));
-		file_put_contents("uploadFiles/sr5-2009.xlsx", file_get_contents("http://www.cincinnati-oh.gov/cityofcincinnati/assets/File/data/service_request_2009.xlsx"));
-		file_put_contents("uploadFiles/sr4-2010.xlsx", file_get_contents("http://www.cincinnati-oh.gov/cityofcincinnati/assets/File/data/service_request_2010.xlsx"));
-		file_put_contents("uploadFiles/sr3-2011.xlsx", file_get_contents("http://www.cincinnati-oh.gov/cityofcincinnati/assets/File/data/service_request_2011.xlsx"));
-		file_put_contents("uploadFiles/sr2-2012.xlsx", file_get_contents("http://www.cincinnati-oh.gov/cityofcincinnati/assets/File/data/service_request_2012.xlsx"));
-		file_put_contents("uploadFiles/sr1-2013.xlsx", file_get_contents("http://www.cincinnati-oh.gov/cityofcincinnati/assets/File/data/service_request_2013.xlsx"));
-		
-
-		$fileNames=array("sr1-2013.xlsx", "sr2-2012.xlsx", "sr3-2011.xlsx", "sr4-2010.xlsx", "sr5-2009.xlsx", "sr6-2008.xlsx");
-		$numFiles=sizeof($fileNames);
-		for ($i=0; $i<$numFiles; $i++) {
-			$fileToImport = "uploadFiles/" . $fileNames[$i]; 
+		$year = $_GET['year'];
+		if($year!=NULL) {
+			$fileToImport = "uploadFiles/sr-".$year.".xlsx"; 
+			echo 'Importing $year Service Request Records...<br><br>';
 			$objPHPExcel = PHPExcel_IOFactory::load($fileToImport);
 			foreach ($objPHPExcel->getWorksheetIterator() as $worksheet) {
 				$worksheetTitle     = $worksheet->getTitle();
 				$highestRow         = $worksheet->getHighestRow(); // e.g. 10
-				echo "The highest row is ".$highestRow."<br>";
+				//echo "The highest row is ".$highestRow."<br>";
 				$highestColumn      = $worksheet->getHighestColumn(); // e.g 'F'
 				$highestColumnIndex = PHPExcel_Cell::columnIndexFromString($highestColumn);
 				$nrColumns = ord($highestColumn) - 64;
@@ -214,19 +205,12 @@
 							mysqli_query($link, $insertQuery);
 							//echo $insertQuery."<br>";
 						}
-					}
-					
-					
-					
-					
+					}	
 				}
 			}
+			echo "File data successfully imported to database!!";
+			mysqli_close($link);
 		}
-
-				
-		
-	
-	echo "File data successfully imported to database!!";
-	mysqli_close($link);
+		else echo "Invalid Year!";
 }
 ?>
