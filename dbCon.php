@@ -1,19 +1,14 @@
 <?php 
-	/*$hostname = "172.31.17.39";
+	$hostname = "172.31.17.39";
 	$username = "kristi";
 	$password = "password";
 	$database = "akndb";
-	
-    
-    define('hostname', 'localhost');
-    define('username', 'root');
-    define('password', '');
-    define('database', 'akndb');*/
 
-    $hostname = "localhost";
+
+    /*$hostname = "localhost";
 	$username = "root";
 	$password = "";
-	$database = "akndb";
+	$database = "akndb";*/
 	
 	$link = mysqli_init();
 	if (!$link) {
