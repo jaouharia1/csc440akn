@@ -19,7 +19,7 @@
 			elseif($this->content==2) {include "sr_by_year.php";}
 			elseif($this->content==3) {include "vp_list.php";}
 			elseif($this->content==4) {include "nhood_list.php";}
-			elseif($this->content==5) {include "map_stat.php";}
+			elseif($this->content==5) {include "search.php";}
 			elseif($this->content==6) {include "nhood_comp.php";}
 			elseif($this->content==7) {include "admin.php";}
 			else {include "main.php";}
