@@ -1,36 +1,35 @@
 <?php
-include 'header.php';
+
 session_start();
+include 'header.php';
+include_once 'functions.php';
+$user = new User();
+if ($user->get_session())
+{
+    header("location:home.php");
+}
 
-$submit  = empty($_POST['submit'])  ? null : $_POST['submit'];
-$username = strtolower(strip_tags(@$_POST['username']));
-$password = strtolower(strip_tags(@$_POST['password']));
-
- if ($username && $password){
-
-	$connect = mysql_connect("172.31.17.39", "kristi", "password") or die("Couldn't connect!!");
-	mysql_select_db("akndb") or die("Couldn't find Database!");
-
-	$query = mysql_query("SELECT * FROM users WHERE username = '$username'");
-	$numrows = mysql_num_rows($query);
-	if($numrows != 0){
-	while($row = mysql_fetch_assoc($query) ){
-		$dbusername = $row['username'];
-		$dbpassword = $row['password'];
-		
-	}
-	if($username==$dbusername && md5($password)==$dbpassword){
-		
-		$_SESSION['username']=$dbusername;
-		header('Location: member.php'); 
-	}else 
-		echo "Incorrect Credentials!";
-
-	}else die("That user doesn't exist!");
-
-
-}else{
-	die("Please enter your credentials");}
-
-
+if ($_SERVER["REQUEST_METHOD"] == "POST") 
+{ 
+    $login = $user->check_login($_POST['emailusername'], $_POST['password']);
+    if ($login) 
+    {
+        // Login Success
+        header("location:login.php");
+    } 
+    else 
+    {
+        // Login Failed
+        $msg= 'Username / password wrong';
+    }
+}
 ?>
+
+<form method="POST" action="" name="login">
+    Email or Username
+<input type="text" name="emailusername"/></br>
+    Password
+<input type="password" name="password"/></br>
+<input type="submit" value="Login"/>
+</form>
+<?php include 'footer.php';?>
