@@ -1,4 +1,7 @@
 <?php
+//ini_set('display_errors',1);
+//ini_set('display_startup_errors',1);
+//error_reporting(-1);
 	echo "<script src=\"tableToExcel.js\"></script>";
 	echo "<hr>";
 	echo "<table width=100%><tr>";
@@ -103,10 +106,8 @@
 						$row['comp_dt']
 						);
 			$srlist->add_sr($sr_temp);
-
 		}
-		$row_count=mysqli_num_rows($result);
-		if($row_count>0){
+		if(count($srlist)>0){
 			$srlist->print_srs();
 			echo "<p><input type=\"button\" onclick=\"tableToExcel('resTable')\" value=\"Export to Excel\"></p>";
 		}
