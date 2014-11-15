@@ -4,7 +4,19 @@
 	error_reporting(-1);
 	
 	include "dbCon.php";
-
+	include 'header.php';
+	include_once 'functions.php';
+	require_once 'PHPExcel/PHPExcel/IOFactory.php';
+	echo "<hr>";
+	$user = new User();
+	// Checking for user logged in or not
+	if ($user->get_session())
+	{
+		header("location:home.php");
+	}
+	
+	file_put_contents("uploadFiles/vps.csv", file_get_contents("http://cagisperm.hamilton-co.org/cpop/vacant.csv"));
+	echo "Downloading Vacant Property Records...<br>";
 	define('CSV_PATH','/var/www/html/csc440/uploadFiles'); // specify CSV file path
     $csv_file = CSV_PATH . "vps.csv"; // Name of your CSV file
 	$csvfile = fopen($csv_file, 'r');
