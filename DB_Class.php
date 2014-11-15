@@ -3,6 +3,10 @@
 class DB_Class
 {
 
+        global $hostname;
+        global $username;
+        global $password;
+        global $database;
     function __construct()
     {
         include_once 'dbCon.php';
