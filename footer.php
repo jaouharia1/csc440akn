@@ -5,7 +5,7 @@
 			<p><a href="login.php">Administrator Login Page</a></p>
 		</td>
 		<td width=50% align="right">
-			<p class="right">2014 AKN</p>
+			<p class="right">2014 Ali & Kristi</p>
 		</td>
 	</tr>
 </table>
