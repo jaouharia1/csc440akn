@@ -11,8 +11,8 @@
 			$name;
 			include "dbCon.php";
 			$query="SELECT type_name FROM sr_type WHERE type_id=$this->type_id";
-			$result = mysql_query($query, $con);
-			while ($row = mysql_fetch_assoc($result)) {
+			$result = mysqli_query($query, $con);
+			while ($row = mysqli_fetch_assoc($result)) {
 				$name=$row['type_name'];
 			}
 			return $name;
