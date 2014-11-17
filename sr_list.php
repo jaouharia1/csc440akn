@@ -1,4 +1,9 @@
 <?php
+	/*ini_set('display_errors',1);
+	ini_set('display_startup_errors',1);
+	error_reporting(-1);*/
+	
+	
 	echo "<script src=\"tableToExcel.js\"></script>";
 	echo "<hr>";
 	echo "<table width=100%><tr>";
@@ -6,7 +11,7 @@
 	echo "<td width=75% class=\"right\">Filter, Search and Map all Service Request Records</td></tr></table>";
 	echo "<hr>";
 	//Database Connection information
-	include "dbCon.php";
+	include_once "dbCon.php";
 	
 	//Initial Query for the results
 	$query = "SELECT * FROM sr_list s
@@ -89,26 +94,48 @@
 		//Make this list for the SRs
 		$srlist = new sr_group();
 		
+		//Create an Array for the addresses to map
+		$i=0;
+		?>
+		<script> var addrList=[]; </script>
+		<?php
+		
+		//Get result and while there are entries
 		$result = mysqli_query($link, $query);
 		while ($row = mysqli_fetch_assoc($result)) {
-			//public function __construct($csr_num, $stat_id, $sr_type, $description, $rcvd_dt, $priority, $parcel, $pln_comp_dt, $comp_dt) {
+			//public function __construct($csr_num, $stat_id, $sr_type, $description, $rcvd_dt, $priority, $parcel, $pln_comp_dt, $comp_dt)
+			$addr=new address($row['parcel']);
 			$sr_temp = new sr( $row['csr_id'],
 						new sr_stat($row['stat_id']),
 						new sr_type($row['type_id']),
 						$row['description'],
 						$row['rcvd_dt'],
 						new sr_priority($row['priority_id']),
-						new address($row['parcel']),
+						$addr,
 						$row['pln_comp_dt'],
 						$row['comp_dt']
 						);
+			if($i<10) {
+				$fullAddy=$addr->getAddress().", Cincinnati, OH";
+				?>
+				<script>
+					addrList.push(<?php echo(json_encode(htmlentities($fullAddy))); ?>);
+				</script>
+				<?php
+				$i++;
+			}
 			$srlist->add_sr($sr_temp);
 
 		}
 		$row_count=mysqli_num_rows($result);
-		if($row_count>0){
+		if($row_count>0){	
+			echo "<table width=50%><tr>";
+			echo "<td width=25%><input type=\"button\" onclick=\"tableToExcel('resTable')\" value=\"Export to Excel\"></td>";
+			echo "<td width=25%><input type=\"button\" value=\"Map Addresses\" onclick=\"codeAddress()\">";
+			echo "</td></tr></table>";
+			echo "<div id=\"map-canvas\" style=\"width: 680px; height: 480px;\"></div>";
 			$srlist->print_srs();
-			echo "<p><input type=\"button\" onclick=\"tableToExcel('resTable')\" value=\"Export to Excel\"></p>";
+
 		}
 		else echo "No Results Found";
 	}
