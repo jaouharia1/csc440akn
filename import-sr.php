@@ -24,7 +24,7 @@
 		foreach ($objPHPExcel->getWorksheetIterator() as $worksheet) {
 			$worksheetTitle     = $worksheet->getTitle();
 			$highestRow         = $worksheet->getHighestRow(); // e.g. 10
-			echo "The highest row is ".$highestRow."<br>";
+			//echo "The highest row is ".$highestRow."<br>";
 			$highestColumn      = $worksheet->getHighestColumn(); // e.g 'F'
 			$highestColumnIndex = PHPExcel_Cell::columnIndexFromString($highestColumn);
 			$nrColumns = ord($highestColumn) - 64;
@@ -46,7 +46,6 @@
 				
 				$cell = $worksheet->getCellByColumnAndRow(8, $xrow);
 				$nhood = trim($cell->getValue());
-				echo $nhood."xx<br>";
 				
 				$cell = $worksheet->getCellByColumnAndRow(10, $xrow);
 				$priority = trim($cell->getValue());
@@ -137,7 +136,7 @@
 				
 				
 				
-				echo $nhood."<br>";
+				//echo $nhood."<br>";
 				if($nhood!="Error") {
 				
 					//If there is a new Status, add it.
@@ -212,7 +211,7 @@
 							('$csr', $status, $type, '$desc', '$rcvd_dt', $priority, '$pln_comp_dt', '$comp_dt', '$parcel')";
 						}
 						mysqli_query($link, $insertQuery);
-						echo $insertQuery."<br>";
+						//echo $insertQuery."<br>";
 					}
 				}	
 			}
