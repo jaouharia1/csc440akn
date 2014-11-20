@@ -1,7 +1,7 @@
 <?php
-	/*ini_set('display_errors',1);
+	ini_set('display_errors',1);
 	ini_set('display_startup_errors',1);
-	error_reporting(-1);*/
+	error_reporting(-1);
 	
 	
 	echo "<script src=\"tableToExcel.js\"></script>";
@@ -89,7 +89,7 @@
 		if($type!=NULL) $query = $query." AND s.type_id=$type ";
 		if($pri!=NULL) $query = $query." AND s.priority_id=$pri ";
 		if($nhood!=NULL) $query = $query." AND a.nhood_id=$nhood ";
-		//echo $query;
+		echo $query;
 		
 		//Make this list for the SRs
 		$srlist = new sr_group();
@@ -127,8 +127,7 @@
 			$srlist->add_sr($sr_temp);
 
 		}
-		$row_count=mysqli_num_rows($result);
-		if($row_count>0){	
+		if(sizeof($srlist)>0){	
 			echo "<table width=50%><tr>";
 			echo "<td width=25%><input type=\"button\" onclick=\"tableToExcel('resTable')\" value=\"Export to Excel\"></td>";
 			echo "<td width=25%><input type=\"button\" value=\"Map Addresses\" onclick=\"codeAddress()\">";
