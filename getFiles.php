@@ -22,7 +22,7 @@
 		file_put_contents("uploadFiles/sr-2013.xlsx", file_get_contents("http://www.cincinnati-oh.gov/cityofcincinnati/assets/File/data/service_request_2013.xlsx"));
 		echo "Downloading 2013 Service Request Records...<br>";
 		file_put_contents("uploadFiles/vp.csv", file_get_contents("http://www.opendatacincy.org/static/cincinnati/Citywide_Vacant_and_Abandoned_Buildings.csv"));
-		echo "Downloading 2008 Service Request Records...<br>";
+		echo "Downloading Vacant Property Records...<br>";
 
 		echo "ALL RECORDS DOWNLOADED<br><br>";
 		echo "<a href=\"home.php\">Return to Admin Console</a><br>";
