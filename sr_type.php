@@ -7,11 +7,11 @@
 		}
 			
 		public function getName() {
-			$name;
+			$name="test";
 			include "dbCon.php";
-			$query="SELECT type_name FROM sr_type WHERE type_id=$this->type_id";
-			$result = mysql_query($link, $query);
-			while ($row = mysql_fetch_assoc($result)) {
+			$query="SELECT type_name FROM sr_type WHERE type_id='$this->type_id' ";
+			$result = mysqli_query($link, $query);
+			while ($row = mysqli_fetch_assoc($result)) {
 				$name=$row['type_name'];
 			}
 			return $name;
