@@ -64,7 +64,7 @@ CREATE TABLE address (
 	st_no varchar(10) NOT NULL,
 	st_dir varchar(5),
 	st_name varchar(30) NOT NULL,
-	nhood_id int(3) NOT NULL,
+	nhood_id int(3),
 	xcoord int(10),
 	ycoord int(10)
 );
