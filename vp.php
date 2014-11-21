@@ -23,7 +23,6 @@
 			//Address,Neighborhood,Status,Type
 			echo "<tr>";
 			$this->makeTD($this->parcel->getAddress());
-			$this->makeTD($this->parcel->getNhood());
 			$this->makeTD($this->type->getName());
 			$this->makeTD($this->status->getName());
 			echo "</tr>";

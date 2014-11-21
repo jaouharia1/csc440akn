@@ -1,23 +1,21 @@
 <?php
-ini_set('display_errors',1);
-ini_set('display_startup_errors',1);
-error_reporting(-1);
-
-include 'dbCon.php';
-class DB_Class
+class DB_Class 
 {
 
-
-    function __construct()
+    function __construct() 
     {
-        global $hostname;
-        global $username;
+        /*$hostname = "172.31.17.39";
+	   $username = "kristi";
+	   $password = "password";
+	   $database = "akndb";*/
+	
+        global $hostname; 
+        global $username; 
         global $password;
         global $database;
-        include_once 'dbCon.php';
-        $connection = mysql_connect($hostname, $username, $password) or
+        $connection = mysql_connect($hostname, $username, $password) or 
         die('Oops connection error -> ' . mysql_error());
-        mysql_select_db($database, $connection)
+        mysql_select_db($database, $connection) 
         or die('Database error -> ' . mysql_error());
     }
 }

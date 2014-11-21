@@ -1,7 +1,4 @@
 <?php
-	//ini_set('display_errors',1);
-	//ini_set('display_startup_errors',1);
-	//error_reporting(-1);
 	
 	class vp_group{
 		
@@ -17,8 +14,8 @@
 		
 		public function print_vps(){
 			echo "<table border=1 id=\"resTable\">";
-			echo "<tr><th>Address</th><th>Neighborhood</th><th>Status</th><th>Type</th><tr>";
-			for($i=0; $i<count($this->vp_array)-1; $i++){
+			echo "<tr><th>Address</th><th>Status</th><th>Type</th><tr>";
+			for($i=0; $i<count($this->vp_array); $i++){
 				$this->vp_array[$i]->displayTableRow();
             }
 		}

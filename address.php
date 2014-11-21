@@ -28,7 +28,7 @@
 		public function getAddress() {
 			$address;
 			include "dbCon.php";
-			$query="SELECT CONCAT_WS(' ', st_no, st_dir, st_name) as addr FROM address WHERE parcel='$this->parcel'";
+			$query="SELECT CONCAT_WS(' ', st_no, st_dir, st_name) as addr FROM address WHERE parcel='".$this->parcel."'";
 			$result = mysqli_query($link, $query);
 			while ($row = mysqli_fetch_assoc($result)) {
 				$address=$row['addr'];
