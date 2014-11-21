@@ -76,7 +76,7 @@ create table vp_stat(
 
 create table vp_type(
 	type_id int(3) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	type_name char(20)
+	type_name char(30)
 );
 
 
