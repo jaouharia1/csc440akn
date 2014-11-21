@@ -45,7 +45,7 @@
 		}
 		//echo "Testing line: type=".$type." addr=".$wholeAddy." status=".$status." parcel=".$parcel." line=".$line."<br>";
 		
-		if($type!=NULL && $wholeAddy!=NULL && $status!=NULL && $parcel!=NULL){
+		if(/*$type!=NULL && $wholeAddy!=NULL && $status!=NULL && $parcel!=NULL*/ $line==3){
 			echo "Importing Record: ".$type.", ".$wholeAddy.", ".$status.", ".$parcel."<br>"; 
 		
 			//If there is a new Status, add it.
