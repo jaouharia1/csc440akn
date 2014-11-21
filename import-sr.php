@@ -138,12 +138,8 @@
 				//Or, some are bad data and the columns are so skewed, we cannot use the data
 				else $nhood="Error";
 				
-				echo "Record: ".$csr.", ".$status.", ".$type.", ".$desc.", ".$rcvd_dt.", ".$priority.", ".$pln_comp_dt.", ".$comp_dt.", ".$parcel."<br>";
-				
-				
-				
-				//echo $nhood."<br>";
 				if($nhood!="Error") {
+					echo "Importing Record: ".$csr.", ".$status.", ".$type.", ".$desc.", ".$rcvd_dt.", ".$priority.", ".$pln_comp_dt.", ".$comp_dt.", ".$parcel."<br>";
 				
 					//If there is a new Status, add it.
 					$StatCheckQuery = "SELECT * FROM sr_stat WHERE stat_name='$status'";
