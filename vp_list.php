@@ -17,12 +17,10 @@
 	//Queries to get the drop downs populated
 	$selQueryStat = "SELECT stat_id, stat_name from vp_stat";
 	$selQueryType = "SELECT type_id, type_name from vp_type";
-	$selQueryNhood = "SELECT nhood_id, name from nhood_list";
 	
 	//Results to populate the drop downs
 	$selResultStat = mysqli_query($link, $selQueryStat);
 	$selResultType = mysqli_query($link, $selQueryType);
-	$selResultNhood = mysqli_query($link, $selQueryNhood);
 	
 	//Filter form, posts to self
 	echo "<form method=\"post\" action=\"index.php?pgNum=3\" width=100%>";
@@ -46,31 +44,19 @@
 	echo "</select>";
 	echo "</td>";
 	
-	//Neighborhood Filter
-	echo "<td>Neighborhood: </td>";
-	echo "<td><select name=\"nhood\" type=\"text\" id=\"nhoood\">";
-	echo '<option value="">All Neighborhoods</option>';
-		while ($row = mysqli_fetch_assoc($selResultNhood)) {
-				echo '<option value="'.$row['nhood_id'].'">'.$row['name'].'</option>';
-		}
-	echo "</select>";
-	echo "</td>";
-	
 	echo '</select><input type="submit" value="Filter" /></form>';
 	
 	//Post results from the form top a variable
 	if(isset($_POST['stat'])) $stat=$_POST['stat'];
 	if(isset($_POST['type'])) $type=$_POST['type'];
-	if(isset($_POST['nhood'])) $nhood=$_POST['nhood'];
 
 	
 	//If All filters are not null, continue (If not filtered, display message to filter)
-	if($stat!=NULL || $type!=NULL || $nhood!=NULL){
+	if($stat!=NULL || $type!=NULL){
 		
 		//Add each filter that is not null as a filter to the query
 		if($stat!=NULL) $query = $query." AND v.stat_id=$stat" ;
 		if($type!=NULL) $query = $query." AND v.type_id=$type" ;
-		if($nhood!=NULL) $query = $query." AND a.nhood_id=$nhood" ;
 		//echo $query;
 		
 		//Make this list for the SRs
