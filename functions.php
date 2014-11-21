@@ -1,5 +1,6 @@
 <?php
 include_once 'dbCon.php';
+include_once 'DB_Class.php';
 class User
 {
     //Database connect 
