@@ -2,7 +2,7 @@
 	echo "<hr>";
 	echo "<table width=100%><tr>";
 	echo "<td width=25% class='title'>Neighborhoods</td>";
-	echo "<td width=75% class=\"right\">Select a Neighborhood and see a Service Request and Vacant Property Record Overview</td></tr></table>";
+	echo "<td width=75% class=\"right\">Select a Neighborhood and see a Record Overview</td></tr></table>";
 	echo "<hr>";
 	
 	include "dbCon.php";
@@ -69,25 +69,29 @@
 			
 			
 			
-			$srQuery="SELECT COUNT(sr.parcel) as cnt, sr_type FROM sr_list sr
+			$srQuery="SELECT COUNT(sr.parcel) as cnt, type_id FROM sr_list sr
 				JOIN address a ON sr.parcel=a.parcel
-				WHERE sr.nhood_id=$nhood 
-				group by sr_type";
+				WHERE a.nhood_id=$nhood 
+				group by sr.type_id";
 			$srResult = mysqli_query($link, $srQuery);
-			$num_rows = mysql_num_rows($srResult);
+			$num_rows = mysqli_num_rows($srResult);
 			if($num_rows>0) {
-				echo "<p class='odcText'>Number of Service Requests By Type:</p>";
 				$sr_tot=0;
-				echo "<table class='odcText' border=1>";
+				
+				echo "<p class='odcText'>Number of Service Requests By Type:</p>";
+				
+				echo "<table class='odcText' border=1><tr><th>Type</th><th>Count</th></tr>";
 				while ($row = mysqli_fetch_assoc($srResult)) {
 					echo "<tr><td>";
-					echo $row['sr_type']->getName();
+					$type=new sr_type($row['type_id']);
+					echo $type->getName();
 					echo ": </td><td>";
 					echo $row['cnt'];
 					echo "</td></tr>";
 					$sr_tot=$sr_tot+$row['cnt'];
 				}
-				echo "<tr><td>Total: </td><tr>$sr_tot</td></tr></table>";
+				echo "</table>";
+				echo "<p class='odcText'>Total: ".$sr_tot."</p>";
 			}
 			else {
 				echo "<p class='odcText'>No Service Request Records were found in this Neighborhood</p>";
