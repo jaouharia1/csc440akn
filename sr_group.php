@@ -18,6 +18,7 @@
 			for($i=0; $i<count($this->sr_array); $i++){
 				$this->sr_array[$i]->displayTableRow();
             }
+			echo "</tr></table>";
 		}
 				
 	}

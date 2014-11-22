@@ -18,6 +18,7 @@
 			for($i=0; $i<count($this->vp_array); $i++){
 				$this->vp_array[$i]->displayTableRow();
             }
+			echo "</tr></table>";
 		}
 		
 	}
