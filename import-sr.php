@@ -191,7 +191,7 @@
 						$num_rows = mysqli_num_rows($AddrCheckResult);
 						if($num_rows==0 and $parcel!=NULL){
 							$AddrInsertQuery = "INSERT INTO address (parcel, st_no, st_dir, st_name, nhood_id, xcoord, ycoord) VALUES
-							('$parcel', '$st_no', '$st_dir', '$st_name', $nhood, $xcoord, $ycoord)";
+							('$parcel', '$st_num', '$st_dir', '$st_name', $nhood, $xcoord, $ycoord)";
 							mysqli_query($link, $AddrInsertQuery);
 						}
 						
