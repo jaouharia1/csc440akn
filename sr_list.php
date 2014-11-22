@@ -89,7 +89,7 @@
 		if($type!=NULL) $query = $query." AND s.type_id=$type ";
 		if($pri!=NULL) $query = $query." AND s.priority_id=$pri ";
 		if($nhood!=NULL) $query = $query." AND a.nhood_id=$nhood ";
-		echo $query;
+		//echo $query;
 		
 		//Make this list for the SRs
 		$srlist = new sr_group();
