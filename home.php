@@ -40,7 +40,7 @@ $result = mysqli_query($link, $query);
 echo "<table border=1><tr><th>Name</th><th>Username</th><th>E-mail</th><th>&nbsp</th></tr>";
 while ($row = mysqli_fetch_assoc($result)) {
 	echo "<tr><td>".$row['name']."</td><td>".$row['username']."</td><td>".$row['email']."</td><td>";
-	echo "<a href='deleteUser.php?uid=".$row['uid'].'">Delete User</a></td></tr>";
+	echo "<a href='deleteUser.php?uid=".$row['uid']."'>Delete User</a></td></tr>";
 }
 echo "</table>";
 
