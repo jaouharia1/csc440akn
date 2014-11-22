@@ -22,7 +22,7 @@ if (@$_GET['q'] == 'logout')
 
 <p><u>Administrator Functions</u><br><br></p>
 
-<table width=100%><tr><td width=50%>
+<table width=100%><tr><td width=50% valign='top'>
 
 <a href="registration.php">Add Administrator</a><br>
 <a href="getFiles.php">Download Service Request and Vacant Property Files From ODC</a><br>
@@ -46,9 +46,7 @@ echo "</table>";
 
 ?>
 
-<br><br><a href="?q=logout">LOGOUT</a>
+<br><a href="?q=logout">LOGOUT</a>
 </td></tr></table>
-
-
 
 <?php include 'footer.php'?>
