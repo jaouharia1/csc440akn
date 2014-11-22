@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     if ($register) 
     {
     // Registration Success
-        echo 'Registration successful <a href="login.php">Click here</a> to login';
+        echo 'Registration successful ';
         echo "<meta http-equiv=\"refresh\" content=\"3;url=home.php\" />";
     }
     else 
