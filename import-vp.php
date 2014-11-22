@@ -127,5 +127,6 @@
 		fclose($csvfile);
 		echo "File data successfully imported to database!!";
 	}
-mysqli_close($con);
+	include 'footer.php';
+	mysqli_close($con);
 ?>
