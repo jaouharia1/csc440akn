@@ -1,5 +1,6 @@
 <?php
-require_once 'PHPUnit/Framework/TestCase.php';
+require_once '../PHPUnit-3.4.0/PHPUnit-3.4.0/PHPUnit/Framework';
+//require_once 'PHPUnit/Framework/TestCase.php';
 require_once '../functions.php';
 
 class UserTest extends PHPUnit_Framework_TestCase
@@ -42,11 +43,9 @@ class UserTest extends PHPUnit_Framework_TestCase
         
         $this->assertEquals($name, $this->UserTest->get_fullname($uid));
         $this->assertNotEquals($fakename, $this->UserTest->get_fullname($uid));
-        $this->assertNotEquals($name, $this->UserTest->get_fullname($uid));//this suppose to fail
+        //this suppose to fail
+        //$this->assertNotEquals($name, $this->UserTest->get_fullname($uid));
     }
-
-
-
 }
 
 ?>
