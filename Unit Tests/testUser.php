@@ -1,5 +1,5 @@
 <?php
-require_once '../PHPUnit-3.4.0/PHPUnit-3.4.0/PHPUnit/Framework';
+require_once '../PHPUnit-3.4.0/PHPUnit-3.4.0/PHPUnit/Framework/TestCase.php';
 //require_once 'PHPUnit/Framework/TestCase.php';
 require_once '../functions.php';
 
