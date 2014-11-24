@@ -17,10 +17,9 @@ class testAddress extends PHPUnit_Framework_Testcase
     public function testGet_Nhood()
     {
         $parcel = 990020129;
-
         $nhood = "CUF";
         $this->assertEquals($nhood, $this->AddressTest->getNhood());
-        $this->assertNotEquals($nhood, $this->AddressTest->getNood);
+        $this->assertNotEquals($nhood, $this->AddressTest->getNhood());
     }
     
     public function testGet_Address()

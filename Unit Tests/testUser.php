@@ -1,6 +1,6 @@
 <?php
-require_once '/var/www/html/csc440/Unit Tests/PHPUnit-3.4.0/PHPUnit-3.4.0/PHPUnit/Framework/TestCase.php';
-//require_once 'PHPUnit/Framework/TestCase.php';
+//require_once '/var/www/html/csc440/Unit Tests/PHPUnit-3.4.0/PHPUnit-3.4.0/PHPUnit/Framework/TestCase.php';
+require_once 'PHPUnit/Framework/TestCase.php';
 require_once '../functions.php';
 
 class UserTest extends PHPUnit_Framework_TestCase
@@ -26,10 +26,8 @@ class UserTest extends PHPUnit_Framework_TestCase
     
     public function testLogin()
     {
-        $name = 'test user';
         $username = 'testUser';
         $password = 123456;
-        $passwordMD5 = "e10adc3949ba59abbe56e057f20f883e";
         
         $this->assertTrue(true, $this->UserTest->check_login($username, $password));
         $this->assertFalse(false, $this->UserTest->check_login($username, $password));
