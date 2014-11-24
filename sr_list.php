@@ -1,7 +1,7 @@
 <?php
-	ini_set('display_errors',1);
-	ini_set('display_startup_errors',1);
-	error_reporting(-1);
+	//ini_set('display_errors',1);
+	//ini_set('display_startup_errors',1);
+	//error_reporting(-1);
 	
 	
 	echo "<script src=\"tableToExcel.js\"></script>";
@@ -127,12 +127,16 @@
 			$srlist->add_sr($sr_temp);
 
 		}
+		?>
+		<script>
+			var addrList = window.opener.addrList;
+		</script>
+		<?php
 		if(sizeof($srlist)>0){	
 			echo "<table width=50%><tr>";
 			echo "<td width=25%><input type=\"button\" onclick=\"tableToExcel('resTable')\" value=\"Export to Excel\"></td>";
-			echo "<td width=25%><input type=\"button\" value=\"Map Addresses\" onclick=\"codeAddress()\">";
+			echo "<td width=25%><input type=\"button\" value=\"Map Addresses\" onclick=\"openMap()\">";
 			echo "</td></tr></table>";
-			echo "<div id=\"map-canvas\" style=\"width: 680px; height: 480px;\"></div>";
 			$srlist->print_srs();
 
 		}
