@@ -83,14 +83,18 @@
 				$i++;
 			}
 			$vplist->add_vp($vp_temp);
-		}
+		}	
+		?>
+		<script>
+			var addrList = window.opener.addrList;
+		</script>
+		<?php
 		$num_rows = mysqli_num_rows($result);
 		if( $num_rows>0 ){
 			echo "<table width=50%><tr>";
 			echo "<td width=25%><input type=\"button\" onclick=\"tableToExcel('resTable')\" value=\"Export to Excel\"></td>";
-			echo "<td width=25%><input type=\"button\" value=\"Map Addresses\" onclick=\"codeAddress()\">";
+			echo "<td width=25%><input type=\"button\" value=\"Map Addresses\" onclick=\"openMap()\">";
 			echo "</td></tr></table>";
-			echo "<div id=\"map-canvas\" style=\"width: 680px; height: 480px;\"></div>";
 			$vplist->print_vps();
 		}
 		else echo "No Results Found";
