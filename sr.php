@@ -35,12 +35,12 @@
 			$this->makeTD($this->stat_id->getName());
 			$this->makeTD($this->sr_type->getName());
 			$this->makeTD($this->description);
-			$this->makeTD($this->rcvd_dt);
+			$this->makeTD(date("m/j/Y", (strtotime($this->rcvd_dt))));
 			$this->makeTD($this->priority->getName());
 			$this->makeTD($this->parcel->getNhood());
 			$this->makeTD($this->parcel->getAddress());
-			$this->makeTD($this->pln_comp_dt);
-			$this->makeTD($this->comp_dt);
+			$this->makeTD(date("m/j/Y", (strtotime($this->pln_comp_dt))));
+			$this->makeTD(date("m/j/Y", (strtotime($this->comp_dt))));
 			echo "</tr>";
 		}
 		
