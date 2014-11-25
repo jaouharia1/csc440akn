@@ -24,12 +24,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     }
 }
 ?>
-
+<table>
 <form method="POST" action="" name="login">
-    Email or Username
-<input type="text" name="emailusername"/></br>
-    Password
-<input type="password" name="password"/></br>
+    <tr><td>  Email or Username</td>
+    <td><input type="text" name="emailusername"/></td>
+    </tr>
+    <tr><td>
+        Password</td>
+      <td>
+          <input type="password" name="password"/></td></tr>
 <input type="submit" value="Login"/>
 </form>
+</table>
 <?php include 'footer.php';?>
