@@ -2,17 +2,23 @@
 	//ini_set('display_errors',1);
 	//ini_set('display_startup_errors',1);
 	//error_reporting(-1);
-	
+	session_start();
 	include 'header.php';
 	include_once 'functions.php';
 	require_once 'PHPExcel/PHPExcel/IOFactory.php';
 	echo "<hr>";
 	$user = new User();
+    $uid = $_SESSION['uid'];
 	// Checking for user logged in or not
 	if ($user->get_session())
 	{
 		header("location:home.php");
 	}
+    if (@$_GET['q'] == 'logout') 
+    {   
+    $user->user_logout();
+    header("location:login.php");
+    }
 		
 		
 	$year = $_GET['year'];
