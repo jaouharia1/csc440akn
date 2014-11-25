@@ -21,9 +21,18 @@ class testSr_priority extends PHPUnit_Framework_TestCase
         $id1 = "standard";
         $id2 = "hazardous";
         $id3 = "priority";
-       // $this->assertEquals($id1, $this->sr_priorityTest->getName());
-       // $this->assertEquals($id2, $this->sr_priorityTest->getName());
+        
+        $id4 = "stan";
+        $id5 = "hazaus";
+        $id6 = "rity";
+        
+        $this->assertEquals($id1, $this->sr_priorityTest->getName());
+        $this->assertEquals($id2, $this->sr_priorityTest->getName());
         $this->assertEquals($id3, $this->sr_priorityTest->getName());
+        
+        $this->assertNotEquals($id4, $this->sr_priorityTest->getName());
+        $this->assertNotEquals($id5, $this->sr_priorityTest->getName());
+        $this->assertNotEquals($id6, $this->sr_priorityTest->getName());
     }
 }
 ?>
