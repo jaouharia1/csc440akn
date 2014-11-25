@@ -21,8 +21,8 @@ class testSr_type extends PHPUnit_Framework_TestCase
         $id193 = "Light repair";
         $id223 = "Sign down/missing";
         $id346 = "Default park";
-       // $this->assertEquals($id1, $this->sr_typeTest->getName());
-       // $this->assertEquals($id2, $this->sr_typeTest->getName());
+        $this->assertNotEquals($id193, $this->sr_typeTest->getName());
+        $this->assertNotEquals($id223, $this->sr_typeTest->getName());
         $this->assertEquals($id346, $this->sr_typeTest->getName());
     }
 }
