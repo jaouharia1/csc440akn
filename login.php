@@ -24,8 +24,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     }
 }
 ?>
-<table>
+
 <form method="POST" action="" name="login">
+    <table>
     <tr><td>  Email or Username</td>
     <td><input type="text" name="emailusername"/></td>
     </tr>
@@ -33,7 +34,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         Password</td>
       <td>
           <input type="password" name="password"/></td></tr>
+    </table>
 <input type="submit" value="Login"/>
 </form>
-</table>
+
 <?php include 'footer.php';?>
