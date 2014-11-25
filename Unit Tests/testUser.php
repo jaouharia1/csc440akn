@@ -12,14 +12,14 @@ class UserTest extends PHPUnit_Framework_TestCase
         $this->UserTest = new User;
     }
     
-    public function testRegistration()
+   public function testRegistration()
     {
         $name = 'test user';
         $username = 'testUser';
         $password = 123456;
         $passwordMD5 = "e10adc3949ba59abbe56e057f20f883e";
         $email = 'test@phpunit.com';
-        echo "testing Registration";
+        
         $this->assertTrue(true, $this->UserTest->register_user($name, $username, $password, $email));
         $this->assertFalse(false, $this->UserTest->register_user($name, $username, $password, $email));
     }
@@ -35,13 +35,13 @@ class UserTest extends PHPUnit_Framework_TestCase
     }
     public function testGet_fullname(){
     
-        $uid=3;
-        $name = 'ali jaouhari';
+        $uid=2;
+        $name = 'test user';
         $fakename = 'some string';
         
         $this->assertEquals($name, $this->UserTest->get_fullname($uid));
         $this->assertNotEquals($fakename, $this->UserTest->get_fullname($uid));
-        //this suppose to fail
+        //this one is suppose to fail
         //$this->assertNotEquals($name, $this->UserTest->get_fullname($uid));
     }
 }
