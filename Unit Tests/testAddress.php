@@ -25,7 +25,9 @@ class testAddress extends PHPUnit_Framework_Testcase
     public function testGet_Address()
     {
         $address = "W MCMICKEN AV";
+        $falseaddress = "E MCMICKEN AV.";
         $this->assertEquals($address, $this->AddressTest->getAddress());
+        $this->assertNotEquals($falseaddress, $this->AddressTest->getAddress());
         
     }
 }
