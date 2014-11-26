@@ -35,11 +35,14 @@ if (@$_GET['q'] == 'logout')
 <a href="import-vp.php">Import Vacant Property Records From Downloaded File</a><br>
 </td><td valign='top'>
 <?php
+
+//Display table for all current admins
 $query = "SELECT * FROM users ";
 $result = mysqli_query($link, $query);
 echo "<table border=1><tr><th>Name</th><th>Username</th><th>E-mail</th><th>&nbsp</th></tr>";
 while ($row = mysqli_fetch_assoc($result)) {
 	echo "<tr><td>".$row['name']."</td><td>".$row['username']."</td><td>".$row['email']."</td>";
+	//If the admin is the current logged in admin, you do not want to give them the ability to delete themselves. If they were the last admin, then none would be remaining.
 	if($row['uid']!=$uid) {
 		echo "<td><a href='deleteUser.php?uid=".$row['uid']."'><img src=\"delAdmin.png\"></a></td></tr>";
 	}
