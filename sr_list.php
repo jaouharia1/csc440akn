@@ -95,7 +95,6 @@
 		$srlist = new sr_group();
 		
 		//Create an Array for the addresses to map
-		$i=0;
 		?>
 		<script> var addrList=[]; </script>
 		<?php
@@ -115,27 +114,32 @@
 						$row['pln_comp_dt'],
 						$row['comp_dt']
 						);
-			if($i<10) {
-				$fullAddy=$addr->getAddress().", Cincinnati, OH";
-				?>
-				<script>
-					addrList.push(<?php echo(json_encode(htmlentities($fullAddy))); ?>);
-				</script>
-				<?php
-				$i++;
-			}
+			//Create full address by adding Cincinnati Ohio for Google and then encode to send to javascript
+			$fullAddy=$addr->getAddress().", Cincinnati, OH";
+			?>
+			<script>
+				addrList.push(<?php echo(json_encode(htmlentities($fullAddy))); ?>);
+			</script>
+			<?php
 			$srlist->add_sr($sr_temp);
 
 		}
+		//Make it so javascript can read the variable addrList in the popup window
 		?>
 		<script>
 			var addrList = window.opener.addrList;
 		</script>
 		<?php
-		if(sizeof($srlist)>0){	
-			echo "<table width=50%><tr>";
-			echo "<td width=25%><input type=\"button\" onclick=\"tableToExcel('resTable')\" value=\"Export to Excel\"></td>";
-			echo "<td width=25%><input type=\"button\" value=\"Map Addresses\" onclick=\"openMap()\">";
+		$num_rows = mysqli_num_rows($result);
+		if($num_rows>0){	
+			echo "<table><tr>";
+			echo "<td width=25% valign='top'><input type=\"button\" onclick=\"tableToExcel('resTable')\" value=\"Export to Excel\"></td>";
+			?>
+			<td valign='top'>How many Addresses would you like to map: </td><td valign='top'>
+			<form>
+			<input type="text" name="numMap" id="numMap" /> <input type="button" onClick="openMap(document.getElementById('numMap').value);" value="Map Addresses"/>
+			</form>
+			<?php
 			echo "</td></tr></table>";
 			$srlist->print_srs();
 
