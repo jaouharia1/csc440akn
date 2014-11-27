@@ -7,8 +7,8 @@
 	var geocoder;
 	var map;
 	var index;
-
-	function codeAddress() {
+	
+	function codeAddress(num) {
 		var addrList = window.opener.addrList;
 		geocoder = new google.maps.Geocoder();
 		var latlng = new google.maps.LatLng(39.174208, -84.481842);
@@ -18,7 +18,8 @@
 		}
 		map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
 		
-		for	(index = 0; index < addrList.length; index++) {
+		//Map up to the number that the user requested or the length of the address array
+		for	(index = 0; index < addrList.length-1 && index <= num-1; index++) {
 			geocoder.geocode( { 'address': addrList[index]}, function(results, status) {
 			if (status == google.maps.GeocoderStatus.OK) {
 				var marker = new google.maps.Marker({
@@ -37,7 +38,11 @@
 	
 </script>
 </head>
-<body onload="codeAddress()">
+<?php
+//Determine how many the user wanted to map
+$num = $_GET['num'];
+echo "<body onload=\"codeAddress($num)\">"
+?>
 	<div id="map-canvas" style="width: 680px; height: 480px;"></div>
 </body>
 </html>
