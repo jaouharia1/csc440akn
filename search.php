@@ -56,6 +56,7 @@
 		$srlist = new sr_group();
 		$vplist = new vp_group();
 		
+		//Add results from VPs and SRs to the group objects
 		$VPresult = mysqli_query($link, $VPquery);
 		while ($row = mysqli_fetch_assoc($VPresult)) {
 			$vp_temp = new vp( new address($row['parcel']), new vp_type($row['type_id']), new vp_stat($row['stat_id']));
@@ -75,6 +76,8 @@
 						);
 			$srlist->add_sr($sr_temp);
 		}
+		
+		//Print results found for that address
 		$num_rowsVP = mysqli_num_rows($VPresult);
 		$num_rowsSR = mysqli_num_rows($SRresult);
 		if( $num_rowsVP==0 && $num_rowsSR==0 ){
