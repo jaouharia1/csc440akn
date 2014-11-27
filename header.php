@@ -39,14 +39,15 @@
 		}
 		body {
 			background-image: url("images/swirl.jpg");
+			background-repeat: no-repeat;
 			background-position: center top; 
 		}
 		
 		
 		</style>
 		<script>
-			function openMap() {
-			window1 = window.open("popup.php", "_blank", "width=700, height=500");
+			function openMap(num) {
+			window1 = window.open("popup.php?num="+num+"", "_blank", "width=700, height=500");
 			}	
 		</script>
 	</head>
