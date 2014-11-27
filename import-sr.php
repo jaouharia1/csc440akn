@@ -1,13 +1,13 @@
 <?php 
-	//ini_set('display_errors',1);
-	//ini_set('display_startup_errors',1);
-	//error_reporting(-1);
-	session_start();
+	/*ini_set('display_errors',1);
+	ini_set('display_startup_errors',1);
+	error_reporting(-1);*/
+	//session_start();
 	include 'header.php';
 	include_once 'functions.php';
 	require_once 'PHPExcel/PHPExcel/IOFactory.php';
 	echo "<hr>";
-	$user = new User();
+	/*$user = new User();
     $uid = $_SESSION['uid'];
 	// Checking for user logged in or not
 	if ($user->get_session())
@@ -18,7 +18,7 @@
     {   
     $user->user_logout();
     header("location:login.php");
-    }
+    }*/
 		
 		
 	$year = $_GET['year'];
@@ -51,8 +51,10 @@
 					
 					$cell = $worksheet->getCellByColumnAndRow(4, $xrow);
 					$rcvd_dt = trim($cell->getValue());
-					$UNIX_DATE = ($rcvd_dt - 25569) * 86400;
-					$rcvd_dt = date("Y-m-d", $UNIX_DATE);
+					if($rcvd_dt!=NULL){
+						$UNIX_DATE = ($rcvd_dt - 25569) * 86400;
+						$rcvd_dt = date("Y-m-d", $UNIX_DATE);
+					}
 					
 					$cell = $worksheet->getCellByColumnAndRow(8, $xrow);
 					$nhood = trim($cell->getValue());
@@ -65,13 +67,17 @@
 					
 					$cell = $worksheet->getCellByColumnAndRow(15, $xrow);
 					$pln_comp_dt = trim($cell->getValue());
-					$UNIX_DATE = ($pln_comp_dt - 25569) * 86400;
-					$pln_comp_dt = date("Y-m-d", $UNIX_DATE);
+					if($pln_comp_dt!=NULL){
+						$UNIX_DATE = ($pln_comp_dt - 25569) * 86400;
+						$pln_comp_dt = date("Y-m-d", $UNIX_DATE);
+					}
 					
 					$cell = $worksheet->getCellByColumnAndRow(17, $xrow);
 					$comp_dt = trim($cell->getValue());
-					$UNIX_DATE = ($comp_dt - 25569) * 86400;
-					$comp_dt = date("Y-m-d", $UNIX_DATE);
+					if($comp_dt!=NULL){
+						$UNIX_DATE = ($comp_dt - 25569) * 86400;
+						$comp_dt = date("Y-m-d", $UNIX_DATE);
+					}
 					
 					$cell = $worksheet->getCellByColumnAndRow(20, $xrow);
 					$xcoord = trim($cell->getValue());
