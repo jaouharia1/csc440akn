@@ -63,18 +63,7 @@ class User
         session_destroy();
     }
     
-    public function getUsersTable()
-    {    
-        
-        $results = mysql_query("SELECT * FROM users");
-        $user_data = mysql_fetch_array($results);
-        echo "Results : " . $results ."</br> user data : ";
-        //print_r($user_data);
-        foreach ($user_data as $data)
-            echo $user_data['name'] ." </br>";
-        
-    
-    }
+
 
 }
 ?>
