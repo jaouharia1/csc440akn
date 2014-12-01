@@ -17,7 +17,6 @@
 			center: latlng
 		}
 		map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-		
 		//Map up to the number that the user requested or the length of the address array
 		for	(index = 0; index < addrList.length-1 && index <= num-1; index++) {
 			geocoder.geocode( { 'address': addrList[index]}, function(results, status) {
@@ -41,6 +40,7 @@
 <?php
 //Determine how many the user wanted to map
 $num = $_GET['num'];
+if($num==NULL) $num=10;
 echo "<body onload=\"codeAddress($num)\">"
 ?>
 	<div id="map-canvas" style="width: 680px; height: 480px;"></div>
