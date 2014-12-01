@@ -91,9 +91,15 @@
 		<?php
 		$num_rows = mysqli_num_rows($result);
 		if( $num_rows>0 ){
-			echo "<table width=50%><tr>";
+			echo "<table><tr>";
 			echo "<td width=25%><input type=\"button\" onclick=\"tableToExcel('resTable')\" value=\"Export to Excel\"></td>";
-			echo "<td width=25%><input type=\"button\" value=\"Map Addresses\" onclick=\"openMap()\">";
+			?>
+			<td valign='top'>How many Addresses would you like to map: </td><td valign='top'>
+			<form>
+			<input type="text" name="numMap" id="numMap" />
+			<input type="button" onClick="openMap(document.getElementById('numMap').value);" value="Map Addresses"/>
+			</form>
+			<?php
 			echo "</td></tr></table>";
 			$vplist->print_vps();
 		}
