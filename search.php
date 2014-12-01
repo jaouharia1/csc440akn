@@ -34,6 +34,10 @@
 	$st_dir=$_POST['st_dir'];
 	$st_name=$_POST['st_name'];
 	
+	//Remove everything but A-Z, a-z, 0-9 and space from the input
+	$st_num = preg_replace('/[^A-Za-z0-9 ]/', '', $st_num);
+	$st_name = preg_replace('/[^A-Za-z0-9 ]/', '', $st_name);
+	
 	//If All filters are not null, continue (If not filtered, display message to filter)
 	if($st_name!=NULL){
 		
@@ -50,7 +54,6 @@
 			$VPquery=$VPquery. " and a.st_name LIKE '%$st_name%' ";
 			$SRquery=$SRquery. " and a.st_name LIKE '%$st_name%' ";
 		}
-		
 		
 		//Make this list for the SRs and one for the VPs
 		$srlist = new sr_group();
