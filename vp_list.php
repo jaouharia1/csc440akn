@@ -15,8 +15,8 @@
 			WHERE 1=1 ";
 
 	//Queries to get the drop downs populated
-	$selQueryStat = "SELECT v.stat_id, v.stat_name from vp_stat v where exists(select 1 from vp_list where stat_id=v.stat_id) ";
-	$selQueryType = "SELECT v.type_id, v.type_name from vp_type v where exists(select 1 from vp_list where type_id=v.type_id) ";
+	$selQueryStat = "SELECT NULL as stat_id, 'All Statuses' as stat_name UNION SELECT v.stat_id, v.stat_name from vp_stat v where exists(select 1 from vp_list where stat_id=v.stat_id) ";
+	$selQueryType = "SELECT NULL as type_id, 'All Types' as type_name UNION SELECT v.type_id, v.type_name from vp_type v where exists(select 1 from vp_list where type_id=v.type_id) ";
 	
 	//Results to populate the drop downs
 	$selResultStat = mysqli_query($link, $selQueryStat);
@@ -27,21 +27,23 @@
 	//VP Status Filter
 	echo "<td>Status: </td>";
 	echo "<td><select name=\"stat\" type=\"text\" id=\"stat\">";
-	echo '<option value="">All Statuses</option>';
-		while ($row = mysqli_fetch_assoc($selResultStat)) {
-				echo '<option value="'.$row['stat_id'].'">'.$row['stat_name'].'</option>';
-		}
-	echo "</select>";
+			while ($row = mysqli_fetch_object($selResultStat)) { ;
+				echo "<option value=\"$row->stat_id\" "; 
+				echo $row->stat_id == $_POST['stat'] ? "selected='selected'" : "";
+				echo ">".$row->stat_name."</option>";
+			}
+			echo "</select>";
 	echo "</td>";
 	
 	//VP Type Filter
 	echo "<td>Type: </td>";
 	echo "<td><select name=\"type\" type=\"text\" id=\"type\">";
-	echo '<option value="">All Types</option>';
-		while ($row = mysqli_fetch_assoc($selResultType)) {
-				echo '<option value="'.$row['type_id'].'">'.$row['type_name'].'</option>';
-		}
-	echo "</select>";
+	while ($row = mysqli_fetch_object($selResultType)) { ;
+				echo "<option value=\"$row->type_id\" "; 
+				echo $row->type_id == $_POST['type'] ? "selected='selected'" : "";
+				echo ">".$row->type_name."</option>";
+			}
+			echo "</select>";
 	echo "</td>";
 	
 	echo '</select><input type="submit" value="Filter" /></form>';

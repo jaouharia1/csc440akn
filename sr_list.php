@@ -19,10 +19,10 @@
 			WHERE 1=1 ";
 
 	//Queries to get the drop downs populated
-	$selQueryStat = "SELECT stat_id, stat_name from sr_stat";
-	$selQueryType = "SELECT type_id, type_name from sr_type";
-	$selQueryPri = "SELECT priority_id, priority_name from sr_priority";
-	$selQueryNhood = "SELECT nhood_id, name from nhood_list";
+	$selQueryStat = "SELECT NULL as stat_id, 'All Statuses' as stat_name UNION SELECT stat_id, stat_name from sr_stat";
+	$selQueryType = "SELECT NULL as type_id, 'All Types' as type_name UNION SELECT type_id, type_name from sr_type";
+	$selQueryPri = "SELECT NULL as priority_id, 'All Priorities' as priority_name UNION SELECT priority_id, priority_name from sr_priority";
+	$selQueryNhood = "SELECT NULL as nhood_id, 'All Neighborhoods' as name UNION SELECT nhood_id, name from nhood_list";
 	
 	//Results to populate the drop downs
 	$selResultStat = mysqli_query($link, $selQueryStat);
@@ -35,41 +35,45 @@
 	//SR Status Filter
 	echo "<td>Status: </td>";
 	echo "<td><select name=\"stat\" type=\"text\" id=\"stat\">";
-	echo '<option value="">All Statuses</option>';
-		while ($row = mysqli_fetch_assoc($selResultStat)) {
-				echo '<option value="'.$row['stat_id'].'">'.$row['stat_name'].'</option>';
-		}
-	echo "</select>";
+			while ($row = mysqli_fetch_object($selResultStat)) { ;
+				echo "<option value=\"$row->stat_id\" "; 
+				echo $row->stat_id == $_POST['stat'] ? "selected='selected'" : "";
+				echo ">".$row->stat_name."</option>";
+			}
+			echo "</select>";
 	echo "</td>";
 	
 	//SR Type Filter
 	echo "<td>Type: </td>";
 	echo "<td><select name=\"type\" type=\"text\" id=\"type\">";
-	echo '<option value="">All Types</option>';
-		while ($row = mysqli_fetch_assoc($selResultType)) {
-				echo '<option value="'.$row['type_id'].'">'.$row['type_name'].'</option>';
-		}
-	echo "</select>";
+	while ($row = mysqli_fetch_object($selResultType)) { ;
+				echo "<option value=\"$row->type_id\" "; 
+				echo $row->type_id == $_POST['type'] ? "selected='selected'" : "";
+				echo ">".$row->type_name."</option>";
+			}
+			echo "</select>";
 	echo "</td>";
 	
 	//SR Priority Filter
 	echo "<td>Type: </td>";
 	echo "<td><select name=\"pri\" type=\"text\" id=\"pri\">";
-	echo '<option value="">All Priorities</option>';
-		while ($row = mysqli_fetch_assoc($selResultPri)) {
-				echo '<option value="'.$row['priority_id'].'">'.$row['priority_name'].'</option>';
-		}
-	echo "</select>";
+	while ($row = mysqli_fetch_object($selResultPri)) { ;
+				echo "<option value=\"$row->priority_id\" "; 
+				echo $row->priority_id == $_POST['pri'] ? "selected='selected'" : "";
+				echo ">".$row->priority_name."</option>";
+			}
+			echo "</select>";
 	echo "</td>";
 	
 	//Neighborhood Filter
 	echo "<td>Neighborhood: </td>";
 	echo "<td><select name=\"nhood\" type=\"text\" id=\"nhoood\">";
-	echo '<option value="">All Neighborhoods</option>';
-		while ($row = mysqli_fetch_assoc($selResultNhood)) {
-				echo '<option value="'.$row['nhood_id'].'">'.$row['name'].'</option>';
-		}
-	echo "</select>";
+	while ($row = mysqli_fetch_object($selResultNhood)) { ;
+				echo "<option value=\"$row->nhood_id\" "; 
+				echo $row->nhood_id == $_POST['nhood'] ? "selected='selected'" : "";
+				echo ">".$row->name."</option>";
+			}
+			echo "</select>";
 	echo "</td>";
 	
 	echo '</select><input type="submit" value="Filter" /></form>';
