@@ -11,8 +11,8 @@ if ($user->get_session())
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") 
 { 
-    $user = $_POST['emailusername']
-    $pass = $_POST['password']
+    $user = $_POST['emailusername'];
+    $pass = $_POST['password'];
     $login = $user->check_login(preg_replace('/[^A-Za-z0-9 ]/', '', $user), preg_replace('/[^A-Za-z0-9 ]/', '', $pass));
     if ($login) 
     {
