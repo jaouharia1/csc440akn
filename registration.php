@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         <td><input type="text" name="email"/></td>
     </tr>
     <tr>
-        <input type="submit" value="Register"/>
+        <td><input type="submit" value="Register"/></td>
     </tr>
 </form>
 </table>
