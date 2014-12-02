@@ -10,7 +10,7 @@ if ($user->get_session())
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") 
 {
-    $register = $user->register_user($_POST['name'], $_POST['username'], $_POST['password'], $_POST['email']);
+    $register = $user->register_user(mysql_real_escape_string($_POST['name']), mysql_real_escape_string($_POST['username']), mysql_real_escape_string($_POST['password'], $_POST['email']));
     if ($register) 
     {
     // Registration Success
