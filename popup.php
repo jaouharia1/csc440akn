@@ -40,6 +40,7 @@
 <?php
 //Determine how many the user wanted to map
 $num = $_GET['num'];
+$num = preg_replace('/[^0-9]/', '', $num);
 if($num==NULL) $num=10;
 echo "<body onload=\"codeAddress($num)\">"
 ?>

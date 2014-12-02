@@ -93,7 +93,10 @@
 		if($type!=NULL) $query = $query." AND s.type_id=$type ";
 		if($pri!=NULL) $query = $query." AND s.priority_id=$pri ";
 		if($nhood!=NULL) $query = $query." AND a.nhood_id=$nhood ";
-		//echo $query;
+		$stat = preg_replace('/[^0-9]/', '', $stat);
+		$type = preg_replace('/[^0-9]/', '', $type);
+		$pri = preg_replace('/[^0-9]/', '', $pri);
+		$nhood = preg_replace('/[^0-9]/', '', $nhood);
 		
 		//Make this list for the SRs
 		$srlist = new sr_group();

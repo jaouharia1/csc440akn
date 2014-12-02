@@ -59,7 +59,8 @@
 		//Add each filter that is not null as a filter to the query
 		if($stat!=NULL) $query = $query." AND v.stat_id=$stat" ;
 		if($type!=NULL) $query = $query." AND v.type_id=$type" ;
-		//echo $query;
+		$stat = preg_replace('/[^0-9]/', '', $stat);
+		$type = preg_replace('/[^0-9]/', '', $type);
 		
 		//Make this list for the SRs
 		$vplist = new vp_group();

@@ -36,6 +36,7 @@
 	
 	//Remove everything but A-Z, a-z, 0-9 and space from the input
 	$st_num = preg_replace('/[^A-Za-z0-9 ]/', '', $st_num);
+	$st_dir = preg_replace('/[^NSEW]/', '', $st_dir);
 	$st_name = preg_replace('/[^A-Za-z0-9 ]/', '', $st_name);
 	
 	//If All filters are not null, continue (If not filtered, display message to filter)

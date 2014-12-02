@@ -27,6 +27,7 @@
 	
 	//Post results from the form top a variable
 	if(isset($_POST['nhood'])) $nhood=$_POST['nhood'];
+	$nhood = preg_replace('/[^A-Za-z0-9 ]/', '', $nhood);
 	
 	//If a neighborhood was selected
 	if($nhood!=NULL){
