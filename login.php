@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 { 
     $user = $_POST['emailusername'];
     $pass = $_POST['password'];
-    $login = $user->check_login(preg_replace('/[^A-Za-z0-9 ]/', '', $user), preg_replace('/[^A-Za-z0-9 ]/', '', $pass));
+    $login = $user->check_login( mysql_real_escape_string($user), mysql_real_escape_string($pass));
     if ($login) 
     {
         // Login Success
