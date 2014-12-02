@@ -11,9 +11,7 @@ if ($user->get_session())
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") 
 { 
-    $user = $_POST['emailusername'];
-    $pass = $_POST['password'];
-    $login = $user->check_login( mysql_real_escape_string($user), mysql_real_escape_string($pass));
+    $login = $user->check_login( mysql_real_escape_string($_POST['emailusername']), mysql_real_escape_string($_POST['password']));
     if ($login) 
     {
         // Login Success
