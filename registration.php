@@ -31,18 +31,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         <td><input type="text" name="name"/></td>>
     </tr>
     <tr>
-    <td>Username</td>
-    <td><input type="text" name="username"/></td>
+        <td>Username</td>
+        <td><input type="text" name="username"/></td>
     </tr>
     <tr>
-    <td>Password</td>
-    <td><input type="password" name="password"/></td>
+        <td>Password</td>
+        <td><input type="password" name="password"/></td>
     </tr>
     <tr>
-    <td>Email</td>
-    <td><input type="text" name="email"/></td>
+        <td>Email</td>
+        <td><input type="text" name="email"/></td>
     </tr>
-    <input type="submit" value="Register"/>
+    <tr>
+        <input type="submit" value="Register"/>
+    </tr>
 </form>
 </table>
 <?php 
