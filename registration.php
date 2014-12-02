@@ -24,18 +24,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     }
 }
 ?>
-
+<table>
 <form method="POST" action="registration.php" name='reg' >
-    Full Name
-    <input type="text" name="name"/></br>
-        Username
-    <input type="text" name="username"/></br>
-        Password
-    <input type="password" name="password"/></br>
-        Email
-    <input type="text" name="email"/></br>
+    <tr>
+        <td>Full Name</td>>
+        <td><input type="text" name="name"/></td>>
+    </tr>
+    <tr>
+    <td>Username</td>
+    <td><input type="text" name="username"/></td>
+    </tr>
+    <tr>
+    <td>Password</td>
+    <td><input type="password" name="password"/></td>
+    </tr>
+    <tr>
+    <td>Email</td>
+    <td><input type="text" name="email"/></td>
+    </tr>
     <input type="submit" value="Register"/>
 </form>
+</table>
 <?php 
 
 include 'footer.php'
