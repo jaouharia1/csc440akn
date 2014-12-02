@@ -47,11 +47,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     </tr>
 </form>
 </table>
+
 <?php 
-
-include 'footer.php'
-
-
+include 'footer.php';
 ?>
 
 
